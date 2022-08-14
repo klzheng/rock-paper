@@ -1,13 +1,17 @@
-// Generates random choice for computer player
-// @return {string} - computer's choice
+/**
+ * Generates random choice for computer player
+ * @return {string} - computer's choice
+ */
 function getComputerChoice() {
     choices = ["Rock", "Paper", "Scissors"]
     return choices[Math.round(Math.random()*2)].toLowerCase()
 }
 
 
-// Asks and checks player's input
-// @return {string} - player's input
+/**
+ * Asks and checks player's input
+ * @return {string} - player's input
+ */
 function checkPlayerChoice() {
     let choice = prompt("Please choose rock, paper, or scissors").toLowerCase()
     while (choice != "rock" && choice != "paper" && choice != "scissors") {
@@ -17,10 +21,12 @@ function checkPlayerChoice() {
 }
 
 
-// Plays a round of rock-paper-scissors
-// @param {string} playerSelection - player's choice
-// @param {string} computerSelection - computer's choice
-// @return {string} - notifies who won the round
+/**
+ * Plays a round of rock-paper-scissors
+ * @param {string} playerSelection - player's choice
+ * @param {string} computerSelection - computer's choice
+ * @return {string} - notifies who won the round
+ */
 function playRound(playerSelection, computerSelection) {
     let losePhrase = `You lose, ${computerSelection} beats ${playerSelection}`
     let winPhrase = `You win, ${playerSelection} beats ${computerSelection}`
@@ -50,8 +56,10 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-// Play rounds until a certain score is reached for either player
-// @return {string} - Tells who won the game after the score limit is reached
+/**
+ * Play rounds until a certain score is reached for either player
+ * @return {string} - Tells who won the game after the score limit is reached
+ */
 function game() {
     let computerScore = 0;
     let playerScore = 0;
