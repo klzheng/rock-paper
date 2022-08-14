@@ -14,7 +14,7 @@ function checkPlayerChoice() {
 function playRound(playerSelection, computerSelection) {
     let losePhrase = `You lose, ${computerSelection} beats ${playerSelection}`
     let winPhrase = `You win, ${playerSelection} beats ${computerSelection}`
-    let tiePhrase = "Tie! No one wins"
+    let tiePhrase = "Tie!"
 
     switch (true) {
         case (playerSelection == computerSelection):
