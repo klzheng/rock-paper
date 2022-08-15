@@ -25,7 +25,7 @@ function checkPlayerChoice() {
  * Plays a round of rock-paper-scissors
  * @param {string} playerSelection - player's choice
  * @param {string} computerSelection - computer's choice
- * @return {string} - notifies who won the round
+ * @return {string} - displays score count, who won the current round, and who won the match if possible
  */
 function playRound(playerSelection, computerSelection) {
     let losePhrase = `You lose, ${computerSelection} beats ${playerSelection}`
@@ -34,57 +34,65 @@ function playRound(playerSelection, computerSelection) {
 
     switch (true) {
         case (playerSelection == computerSelection):
-            // console.log(tiePhrase)
-            return tiePhrase
+            content.textContent = tiePhrase
             break
         case (playerSelection == "rock" && computerSelection == "paper"):
-            // console.log(losePhrase)
-            return losePhrase
+            computerScore ++
+            content.textContent = losePhrase
+            // return losePhrase
             break
-        case (playerSelection == "paper" && computerSelection == "scissor"):
-            // console.log(losePhrase)
-            return losePhrase
+        case (playerSelection == "paper" && computerSelection == "scissors"):
+            computerScore ++
+            content.textContent = losePhrase           
+            // return losePhrase
             break
         case (playerSelection == "scissors" && computerSelection == "rock"):
-            // console.log(losePhrase)
-            return losePhrase
+            computerScore ++
+            content.textContent = losePhrase
+            // return losePhrase
             break
         default:
-            // console.log(winPhrase)
-            return winPhrase
-    }
-}
-
-
-/**
- * Play rounds until a certain score is reached for either player
- * @return {string} - Tells who won the game after the score limit is reached
- */
-function game() {
-    let computerScore = 0;
-    let playerScore = 0;
-    const scoreLimit = 5;
-    while (computerScore < scoreLimit && playerScore < scoreLimit) {
-        let playerChoice = checkPlayerChoice()
-        let computerChoice = getComputerChoice()
-
-        if (playRound(playerChoice, computerChoice).includes("win")){
             playerScore ++
-        } else if (playRound(playerChoice, computerChoice).includes("lose")) {
-            computerScore ++
-        } 
-        console.log(`Player Score: ${playerScore} \nComputer Score: ${computerScore}`)
+            content.textContent = winPhrase
+            // return winPhrase
     }
 
     switch (true) {
         case (computerScore == scoreLimit):
-            console.log("Computer Wins")
-            return "Computer wins"
+            content.textContent = "Computer Wins"
+            document.querySelector(".rock").disabled = true;
+            document.querySelector(".paper").disabled = true;
+            document.querySelector(".scissors").disabled = true;
+            // return "Computer wins"
             break
-        default:
-            console.log("Player Wins")
-            return "Player wins"
+        case (playerScore == scoreLimit):
+            content.textContent = "Player Wins"
+            document.querySelector(".rock").disabled = true;
+            document.querySelector(".paper").disabled = true;
+            document.querySelector(".scissors").disabled = true;
+            // return "Player wins"
+            break
     }
+    let scoreKeeper = `Player Score: ${playerScore} \nComputer Score: ${computerScore}`
+    score.textContent = scoreKeeper
 }
 
-// game() <- type this in console to initiate game
+// Setting scores of player to 0
+let computerScore = 0;
+let playerScore = 0;
+const scoreLimit = 5; // Score number before the game ends
+
+// Adding divs to main container 
+const container = document.querySelector("#container")
+const content = document.createElement("div")
+const score = document.createElement("div")
+container.appendChild(content)
+container.appendChild(score)
+
+// Adding 'click' event listeners with function call to the buttons
+const rock = document.querySelector(".rock")
+const paper = document.querySelector(".paper")
+const scissors = document.querySelector(".scissors")
+rock.addEventListener("click", () => playRound("rock", getComputerChoice()))
+paper.addEventListener("click", () => playRound("paper", getComputerChoice()))
+scissors.addEventListener("click", () => playRound("scissors", getComputerChoice()))
